@@ -49,6 +49,58 @@ class LinkedList:
     newNode.next = prevNode.next
 
     prevNode.next = newNode
+    
+  def delete(self, data):
+    temp = self.head
+
+    if temp is not None and temp.data == data:
+
+      self.head = temp.next
+      temp = None
+      return
+    
+    while temp is not None:
+      if temp.data == data:
+        break
+      
+      prevNode = temp
+      temp = temp.next
+    
+    if temp is None:
+      print("Could not find '" + str(data) + "' in the Linked List")
+      return
+    
+    prevNode.next = temp.next
+
+    del temp
+  
+  def deleteAt(self, position):
+
+    if self.head == None:
+      print("This list is empty!")
+      return
+    
+    temp = self.head
+
+    if position == 0:
+      self.head = temp.next
+      del temp
+      return
+
+    for i in range(position-1):
+      temp = temp.next
+      if temp is None:
+        break
+    
+    if temp is None or temp.next is None:
+      print("This position is out of range!")
+      return
+    
+    next = temp.next.next
+
+    del temp.next
+
+    temp.next = next
 
 
 class Node:
